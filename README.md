@@ -1,6 +1,8 @@
 # UMLGenerator
-Just a small web app for generating class diagrams in UML. Not guaranteed to run the best. Special 4-clause BSD license
+Just a small web app for generating class diagrams in UML. Not guaranteed to run the best. Special 4-clause BSD license.
+
 Use of this program and its source falls under this modified 4-clause BSD License:
+
 Special 4 clause BSD license:
 		
 		Copyright 2017 Grant Alexander
@@ -11,8 +13,7 @@ Special 4 clause BSD license:
 
 		2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-		3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products   derived
-		from this software without specific prior written permission.
+		3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 		
 		4. Use of this program and/or its source for software projects whose intent or purpose is to harm a human being, is prohibited
 		
