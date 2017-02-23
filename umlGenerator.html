@@ -1,0 +1,232 @@
+<html>
+
+	<!--
+		Special 4 clause BSD license:
+		
+		Copyright 2017 Grant Alexander
+
+		Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+		1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+		2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer
+		in the documentation and/or other materials provided with the distribution.
+
+		3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived
+		from this software without specific prior written permission.
+		
+		4. Use of this program and/or its source for software projects whose intent or purpose is to harm a human being is prohibited
+		
+		THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+		INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+		DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+		SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+		SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+		WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+		USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	-->
+	<head>
+		<title>UML Generator</title>
+		<style type="text/css">
+			body {
+				background-color:grey;
+			}
+			div.container {
+				display:inline-block;
+				background-color:beige;
+				padding:0px;
+			}
+			div.UMLContainer {
+				display:inline-block;
+				width:1000px;
+				padding:0px;
+			}
+			div.tableCell {
+				display:inline-block;
+				width:300px;
+				padding:0px;
+				text-align:left;
+			}
+			div.title {
+				display:inline-block;
+				width:100%;
+				background-color:maroon;
+				color:white;
+				padding:0px;
+			}
+			input[type=button].tableButton {
+				display:inline-block;
+				width:100px;
+				color:white;
+				background-color:maroon;
+				padding:0px;
+			}
+			div.tableCellWide {
+				display:inline-block;
+				width:700px;
+				padding:0px;
+			}
+			div.tableCellButton {
+				display:inline-block;
+				width:100px;
+				padding:3px;
+			}
+			div.invisible {
+				display:inline-block;
+				padding:0px;
+			}
+			div.UMLHeader {
+				display:inline-block;
+				width:500px;
+				background-color:maroon;
+				color:white;
+				font-weight:bold;
+				text-align:center;
+				padding:0px;
+			}
+			div.generalUML {
+				display:inline-block;
+				width:500px;
+				background-color:beige;
+				padding:0px;
+			}
+			div.UMLAttributes {
+				display:inline-block;
+				padding:2px;
+				width:498px;
+				text-align:left;
+			}
+			div.UMLClasses {
+				display:inline-block;
+				padding:2px;
+				width:498px;
+				text-align:left;
+			}
+			hr.UMLDivider {
+				color:brown;
+				width:500px;
+				display:inline-block;
+			}
+		</style>
+		<script type="text/javascript">
+		var n = 1;
+		var m = 1;
+		var count = 0;
+		
+		function addAttr() {
+		    /* Method to add another attribute row */
+			var attr = document.getElementById("attributes");
+			attr.innerHTML += "<br />";
+			attr.innerHTML += "<div class=\"tableCell\">Attribute:</div>";
+			attr.innerHTML += "<div class=\"tableCell\"><input class=\"attribute\" type=\"text\" /></div>";
+			attr.innerHTML += "<div class=\"tableCellButton\">&nbsp;</div>";
+			n += 1;
+		}
+		function addMethod() {
+			/* Method to add another method row */
+			var met = document.getElementById("methods");
+			met.innerHTML += "<br />";
+			met.innerHTML += "<div class=\"tableCell\">Method:</div>";
+			met.innerHTML += "<div class=\"tableCell\"><input class=\"method\" type=\"text\" /></div>";
+			met.innerHTML += "<div class=\"tableCellButton\">&nbsp;</div>";
+			m += 1;
+		}
+		function createUML() {
+			/* Method to create a UML diagram based on the data in the table */
+			var space = document.getElementById("UML");
+			var attributeArray = document.getElementsByClassName("attribute");
+			var methodArray = document.getElementsByClassName("method");
+			var name = document.getElementById("name").value;
+			
+			space.innerHTML += "<br />";
+			space.innerHTML += "<br />";
+			space.innerHTML += "<div class=\"generalUML\" id=\"UMLG"+count+"\"></div>";
+			
+			var insideGeneralUMLContainer = document.getElementById("UMLG"+count);
+			insideGeneralUMLContainer.innerHTML += "<div class=\"UMLHeader\">"+name+"</div>";
+			insideGeneralUMLContainer.innerHTML += "<br />";
+			insideGeneralUMLContainer.innerHTML += "<div class=\"UMLAttributes\" id=\"UMLA"+count+"\"></div>";
+			insideGeneralUMLContainer.innerHTML += "<hr class=\"UMLDivider\" />";
+			insideGeneralUMLContainer.innerHTML += "<div class=\"UMLClasses\" id=\"UMLC"+count+"\"></div>";
+			
+			var insideUMLAttributeSection = document.getElementById("UMLA"+count);
+			for(var x = 0; x < n; x++)
+			{
+				if(attributeArray[x].value != "")
+				{
+					insideUMLAttributeSection.innerHTML += attributeArray[x].value;
+					insideUMLAttributeSection.innerHTML += "<br />";
+				}
+			}
+			
+			var insideUMLClassesSection = document.getElementById("UMLC"+count);
+			for(var x = 0; x < m; x++)
+			{
+				if(methodArray[x].value != "")
+				{
+					insideUMLClassesSection.innerHTML += methodArray[x].value;
+					insideUMLClassesSection.innerHTML += "<br />";
+				}
+			}
+			count += 1;
+		}
+		</script>
+	</head>
+	<body>
+	<div align="center">
+		<div class="container">
+		    <div class="invisible">
+				<div class="title">
+					UML Generating Tool
+				</div>
+				<br />
+				<br />
+				<div class="tableCell">
+					&nbsp;Name:
+				</div>
+				<div class="tableCell">
+					<input id="name" type="text" />
+				</div>
+				<div class="tableCellButton">
+				</div>
+			</div>
+			<br />
+			<div class="invisible" id="attributes">
+				<!-- Block to insert attributes with addAttr(); -->
+				<div class="tableCell">
+					&nbsp;Attribute:
+				</div>
+				<div class="tableCell">
+					<input class="attribute" type="text" />
+				</div>
+				<div class="tableCellButton">
+					<input type="button" class="tableButton" value="+" onclick="javascript:addAttr();"/>
+				</div>
+			</div>
+			<br />
+			<div class="invisible" id="methods">
+			    <!-- Block to insert methods with addMethod(); -->
+				<div class="tableCell">
+					&nbsp;Method:
+				</div>
+				<div class="tableCell">
+					<input class="method"type="text" />
+				</div>
+				<div class="tableCellButton">
+					<input type="button" class="tableButton" value="+" onclick="javascript:addMethod();" />
+				</div>
+			</div>
+			<br />
+			<div class="tableCellWide">
+				<input type="button" class="tableButton" value="Create" onclick="javascript:createUML();" />
+			</div>
+		</div>
+	<br />
+	<br />
+	<div class="UMLContainer" id="UML">
+	<!-- UML diagrams will be placed here. Note: they are not actually written to file! -->
+	&nbsp;
+	</div>
+	</div>
+	</body>
+</html>
